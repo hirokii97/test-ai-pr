@@ -27,6 +27,8 @@ jobs:
         with:
           openai_light_model: gpt-3.5-turbo
           openai_heavy_model: gpt-3.5-turbo
+          openai_timeout_ms: 900000
+          language: ja-JP
           debug: false
           review_simple_changes: false
           review_comment_lgtm: false
