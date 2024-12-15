@@ -1,9 +1,44 @@
 import Image from "next/image";
+import LinkButton from "./components/LinkButton";
+
+export type category =  {
+  id: any,
+  name: string
+  url: string
+  isShow: boolean
+}
 
 export default function Home() {
-  const buttonStyle = {
-    color: "red"
-  };
+
+  const allCategories: category[] = [
+    {
+      id: 1,
+      name: "旅行",
+      url: "/travel",
+      isShow: true,
+    },
+    {
+      id: 2,
+      name: "グルメ",
+      url: "/food",
+      isShow: false,
+    },
+    {
+      id: 3,
+      name: "地域",
+      url: "/city",
+      isShow: true,
+    },
+    {
+      id: 4,
+      name: "期間限定",
+      url: "/only_now",
+      isShow: true,
+    },
+  ]
+  // 一部のカテゴリーのみ表示させる
+  const showCategories = allCategories.filter(category => category.isShow !== true)
+
   return (
     <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
       <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
@@ -51,6 +86,10 @@ export default function Home() {
           >
             Read our docs
           </a>
+        </div>
+        <div className="flex gap-4 items-center flex-col sm:flex-row">
+          {/* 上から２つのカテゴリーのみ表示する */}
+          {showCategories.map((category) => <LinkButton category={category}/>)}
         </div>
       </main>
       <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center">
