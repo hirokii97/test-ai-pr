@@ -19,15 +19,6 @@ concurrency:
 jobs:
   review:
     runs-on: ubuntu-latest
-    if: ${{ github.event.issue.pull_request && contains(github.event.comment.body, '/review') }}
-    steps:
-      - uses: actions/checkout@v2
-      - name: Get PR branch
-        id: get_branch
-        run: |
-          PR_URL="${{ github.event.issue.pull_request.url }}"
-          PR_BRANCH=$(curl -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" $PR_URL | jq -r .head.ref)
-          echo "::set-output name=branch::$PR_BRANCH"
     steps:
       - uses: coderabbitai/ai-pr-reviewer@latest
         env:
